@@ -1,74 +1,136 @@
-gsap.from("#logo", {
-  y: -160, //y axis
-  scale: 6, //size of text
-  color: 'white',
-  scrollTrigger: {
-    trigger: '.navbar',
-    start: 'top 100%', //scroll start hobe 
-    end: '100% top',
-    // markers : true,
-    scrub: true //end scrooll-end  k na cross kore tototkhn tmi scroll koro
-  }
-})
+let mm = gsap.matchMedia();
 
 
-gsap.from('.content h1', {
+mm.add("(min-width: 1024px)", () => {
 
-  y: 80,
-  opacity: 0,
-  stagger: .2,
+  gsap.from("#logo", {
+    y: -400,
+    scale: 6,
 
-  scrollTrigger: {
-    trigger: '.content',
-    start: '10% 50%',
-    // end : 'bottom top',
-    scrub: true,
+    color: 'white',
+    scrollTrigger: {
+      trigger: '.navbar',
+      start: 'top 100%',
+      end: '100% top',
+      scrub: true
+    }
+  });
 
-    toggleActions: 'play reverse play reverse' //reverse korar jonno 
-  }
-})
+  gsap.from('.content h1', {
+    y: 80,
+    opacity: 0,
+    stagger: .2,
+    scrollTrigger: {
+      trigger: '.content',
+      start: '10% 50%',
+      scrub: true,
+      toggleActions: 'play reverse play reverse'
+    }
+  });
+
+  const photos = document.querySelector('.photos');
+  const photosContainer = photos.scrollWidth;
+  const windowInner = window.innerWidth;
+  const scrollDistance = photosContainer - windowInner + 280;
+
+  gsap.to('.photos', {
+    x: -scrollDistance,
+    scrollTrigger: {
+      trigger: '.photos-wrapper',
+      start: '40% 40%',
+      end: `+=${scrollDistance}`,
+      scrub: true,
+      pin: true
+    }
+  });
+
+  gsap.from('.tags li', {
+    y: 80,
+    opacity: 0,
+    stagger: .2,
+    rotate: 10,
+    scrollTrigger: {
+      trigger: '.tags',
+      start: 'top 70%',
+      end: 'bottom 40%',
+    }
+  });
+
+  gsap.from('.footer', {
+    y: 100,
+    opacity: 0,
+    duration: 2,
+    scrollTrigger: {
+      trigger: '.footer',
+      start: 'top 100%',
+    }
+  });
+
+});
 
 
-const photos = document.querySelector('.photos') //oi div ta k dorlam
-const photosConTainer = photos.scrollWidth //photo container ar width ber korlam
-const windowInner = window.innerWidth //device ar width ber korlam
-const scrollDistance = photosConTainer - windowInner + 280 //koto tuku scroll korbo calculate korlam
+mm.add("(max-width: 1023px)", () => {
 
+  gsap.from("#logo", {
+    y: -100,
+    scale: 3,
+    color: 'white',
+    scrollTrigger: {
+      trigger: '.navbar',
+      start: 'top 90%',
+      end: '100% top',
+      scrub: true
+    }
+  });
 
+  gsap.from('.content h1', {
+    y: 50,
+    opacity: 0,
+    stagger: .15,
+    scrollTrigger: {
+      trigger: '.content',
+      start: 'top 80%',
+      scrub: true,
+      toggleActions: 'play reverse play reverse'
+    }
+  });
 
-gsap.to('.photos', {
-  x: -scrollDistance,
-  scrollTrigger : {
-    trigger : '.photos-wrapper',
-    start : '40% 40%',
-    end : `+=${scrollDistance}`,
-    scrub : true,
-    pin : true
-  }
-})
+  const photos = document.querySelector('.photos');
+  const photosContainer = photos.scrollWidth;
+  const windowInner = window.innerWidth;
+  const scrollDistance = photosContainer - windowInner + 100;
 
-gsap.from('.tags li',{
+  gsap.to('.photos', {
+    x: -scrollDistance,
+    scrollTrigger: {
+      trigger: '.photos-wrapper',
+      start: 'top 50%',
+      end: `+=${scrollDistance}`,
+      scrub: true,
+      pin: true
+    }
+  });
 
-  y : 80,
-  opacity : 0,
-  stagger : .2,
-  rotate : 10,
-  scrollTrigger : {
+  gsap.from('.tags li', {
+    y: 50,
+    opacity: 0,
+    stagger: .15,
+    rotate: 5,
+    scrollTrigger: {
+      trigger: '.tags',
+      start: 'top 80%',
+      end: 'bottom 50%',
+    }
+  });
 
-    trigger : '.tags',
-    start : 'top 70%',
-    end : 'bottom 40%',
-  }
-})
-gsap.from('.footer',{
-  y : 100,
-  opacity : 0, 
-  duration : 2,
-  scrollTrigger : {
+  gsap.from('.footer', {
+    y: 60,
+    opacity: 0,
+    duration: 1.5,
+    scrollTrigger: {
+      trigger: '.footer',
+      start: 'top 95%',
+    }
+  });
 
-    trigger : '.footer',
-    start : 'top 100%',
-
-
-  }
-})
+});
